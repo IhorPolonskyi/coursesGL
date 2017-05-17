@@ -14,13 +14,14 @@ import static utility.Services.AdditionalService.getCookieValue;
 import static utility.Services.AdditionalService.verifyCookieIsSet;
 import static utility.Services.ManageUrlService.getCurrentURL;
 import static utility.Services.ManageUrlService.getURL;
+import static utility.Services.ManageUrlService.refreshPage;
 import static utility.Services.WaiterService.waitForCookie;
 import static utility.Services.WaiterService.waitForElementVisible;
 
 /**
  * Created by igorp on 11/05/17.
  */
-public class Study_001_LoginUserPartTestCase extends DefaultTestCase {
+public class Study_001_LoginUserPartTestCase extends DefaultTestCase implements HelpMethods {
 
     @Test
     public void test_001(){
@@ -41,18 +42,7 @@ public class Study_001_LoginUserPartTestCase extends DefaultTestCase {
         //login with returning user
         indexPage.login(returningUser);
 
-        if(indexPage.loginErrorMessage.isEnabled() && indexPage.getErrorText().equals(studyTexts.get("errorMessage"))){
-            //click on create account link
-            indexPage.clickOnCreateAccountLink();
-
-            //create new account with generating new email
-            waitForElementVisible(indexPage.createAccountButtonCss, driver);
-            indexPage.createAccount(returningUser);
-            indexPage.clickOnLoginButton();
-            waitForElementVisible(indexPage.signInButtonCss, driver);
-            indexPage.login(returningUser);
-
-        }
+        huckToCreateAccount(driver);
 
         HeaderPagePart headerPagePart = initElements(driver, HeaderPagePart.class);
         waitForElementVisible(indexPage.pageTitle, driver);
