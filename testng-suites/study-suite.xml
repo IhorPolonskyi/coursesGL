@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Study suite" >
+
+    <test name="Study_001_LoginUserPartTestCase">
+        <classes>
+            <class name="studytestsuite.Study_001_LoginUserPartTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Study_002_LoginAdminPartTestCase">
+        <classes>
+            <class name="studytestsuite.Study_002_LoginAdminPartTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Study_003_CreateUserTestCase">
+        <classes>
+            <class name="studytestsuite.Study_003_CreateUserTestCase"/>
+        </classes>
+    </test>
+
+
+
+</suite>
