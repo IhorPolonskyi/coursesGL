@@ -8,13 +8,10 @@ import utility.Constants;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static studytestsuite.HelpMethods.returningUser;
-import static studytestsuite.HelpMethods.studyTexts;
 import static utility.Services.AdditionalService.getCookieValue;
 import static utility.Services.AdditionalService.verifyCookieIsSet;
 import static utility.Services.ManageUrlService.getCurrentURL;
 import static utility.Services.ManageUrlService.getURL;
-import static utility.Services.ManageUrlService.refreshPage;
 import static utility.Services.WaiterService.waitForCookie;
 import static utility.Services.WaiterService.waitForElementVisible;
 
@@ -42,6 +39,7 @@ public class Study_001_LoginUserPartTestCase extends DefaultTestCase implements 
         //login with returning user
         indexPage.login(returningUser);
 
+        //if db was cleared, this method try to recreate this user
         huckToCreateAccount(driver);
 
         HeaderPagePart headerPagePart = initElements(driver, HeaderPagePart.class);

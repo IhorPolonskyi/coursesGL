@@ -21,12 +21,12 @@ public interface HelpMethods {
     User adminUser = new User("properties/user/adminUser.properties");
     User newUser = new User("properties/user/newUser.properties");
 
-    Map<String, String> studyTexts = getMap("properties/studysuite/texts.txt");
+    Map<String, String> studyTexts = getMap("src/test/resources/properties/studysuite/texts.txt");
 
     default void huckToCreateAccount(WebDriver driver){
 
         IndexPage indexPage = initElements(driver, IndexPage.class);
-        if(indexPage.loginErrorMessage.isEnabled() && indexPage.getErrorText().equals(studyTexts.get("errorMessage"))){
+        if(!indexPage.loginErrorMessage.isEmpty( )&& indexPage.getErrorText().equals(studyTexts.get("errorMessage"))){
             //click on create account link
             indexPage.clickOnCreateAccountLink();
 

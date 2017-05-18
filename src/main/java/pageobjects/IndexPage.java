@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 import static utility.Services.WebElementService.clickOnElement;
 import static utility.Services.WebElementService.sendKeysClear;
 
@@ -32,7 +34,7 @@ public class IndexPage {
     public WebElement passwordCreate;
 
     @FindBy(className = "error")
-    public WebElement loginErrorMessage;
+    public List<WebElement> loginErrorMessage;
 
     @FindBy(id = "password-conf")
     public WebElement passwordConfirmCreate;
@@ -93,12 +95,12 @@ public class IndexPage {
     }
 
     public String getErrorText(){
-        return loginErrorMessage.getText();
+        return loginErrorMessage.get(0).getText();
     }
 
     public void login(User user){
         sendKeysClear(email, "Email form", user.getEmail(), driver);
-        sendKeysClear(email, "Password form", user.getPassword(), driver);
+        sendKeysClear(password, "Password form", user.getPassword(), driver);
 
         clickOnSignInButton();
     }

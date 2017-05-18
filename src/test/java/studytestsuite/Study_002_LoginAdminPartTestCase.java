@@ -43,11 +43,10 @@ public class Study_002_LoginAdminPartTestCase extends DefaultTestCase {
 
         //login to admin panel
         adminPage.login(adminUser);
-        waitPageLoader(studyTexts.get("adminPagePartUrl"), driver);
+        //TODO fix huck
+        waitPageLoader(studyTexts.get("adminPagePartUrl").replace("+","="), driver);
 
         //wait for trial popup and close it
-        //TODO FIX
-        sleep(5);
         waitForElementVisible(adminPage.closeTrialPopUpCross, driver);
         adminPage.clickOnCloseTrialPopupCross();
 
