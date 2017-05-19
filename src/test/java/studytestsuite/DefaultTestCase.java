@@ -7,7 +7,6 @@ import utility.Log;
 
 import java.util.concurrent.TimeUnit;
 
-import static utility.Constants.browser;
 import static utility.Services.WebDriverFactory.getDriverInstance;
 /**
  * Created by igorp on 11/05/17.
@@ -15,6 +14,7 @@ import static utility.Services.WebDriverFactory.getDriverInstance;
 public class DefaultTestCase {
 
     public WebDriver driver;
+    public String browser = System.getProperty("browser","ff");
 
     @BeforeMethod
     public void runBrowser() {

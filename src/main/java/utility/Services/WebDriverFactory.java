@@ -3,7 +3,6 @@ package utility.Services;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,14 +19,13 @@ public class WebDriverFactory {
         WebDriver driver;
         switch (browserName){
             case BrowserType.CHROME:
-                driver= setChromeProperty();
+                driver = setChromeProperty();
                 break;
             case BrowserType.FIREFOX:
-                driver= setFirefoxProperty();
+                driver = setFirefoxProperty();
                 break;
             default:
-                System.setProperty(CHROME_DRIVER_EXE_PROPERTY, "chromedriver");
-                driver =  new FirefoxDriver();
+                driver = setChromeProperty();
                 break;
         }
         return driver;
