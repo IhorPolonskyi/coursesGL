@@ -3,6 +3,8 @@
 
 <suite name="Study suite" >
 
+    <parameter name="browser" value="chrome"/>
+
     <test name="Study_001_LoginUserPartTestCase">
         <classes>
             <class name="studytestsuite.Study_001_LoginUserPartTestCase"/>
