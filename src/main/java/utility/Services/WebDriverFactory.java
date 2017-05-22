@@ -36,6 +36,11 @@ public class WebDriverFactory {
         return new ChromeDriver(getChromeDesiredCapabilities());
     }
 
+    private static WebDriver setFirefoxProperty(){
+        System.setProperty(GECKO_DRIVER_EXE_PROPERTY, "geckodriver");
+        return  new FirefoxDriver(getFirefoxDesiredCapabilities());
+    }
+
     private static DesiredCapabilities getChromeDesiredCapabilities() {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setJavascriptEnabled(true);
@@ -45,9 +50,13 @@ public class WebDriverFactory {
         return desiredCapabilities;
     }
 
-    private static WebDriver setFirefoxProperty(){
-        System.setProperty(GECKO_DRIVER_EXE_PROPERTY, "geckodriver");
-        return  new FirefoxDriver();
+    private static DesiredCapabilities getFirefoxDesiredCapabilities() {
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setJavascriptEnabled(true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
+        desiredCapabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+
+        return desiredCapabilities;
     }
 
 }
