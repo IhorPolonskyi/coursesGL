@@ -1,5 +1,5 @@
 /.classpath
-/CourcesGL.iml
 geckodriver
 /target
-/.idea
+/.idea/
+/CoursesGL.iml
