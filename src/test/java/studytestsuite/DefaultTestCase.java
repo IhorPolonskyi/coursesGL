@@ -22,7 +22,6 @@ public class DefaultTestCase {
     @BeforeMethod
     public void runBrowser(@Optional("chrome") String browserValue) {
 
-        // browser = browserValue;
          driver = getDriverInstance(browserValue);
 
          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

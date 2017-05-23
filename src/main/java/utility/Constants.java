@@ -11,5 +11,4 @@ public class Constants {
 
     public static final int PAGE_TIMEOUT = 60;
     public static final int ELEMENT_TIMEOUT = 20;
-    public static final String browser = System.getProperty("browser");
 }

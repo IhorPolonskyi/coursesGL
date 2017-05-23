@@ -2,10 +2,13 @@ package utility.Services;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.List;
 
 import static org.openqa.selenium.chrome.ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
 import static org.openqa.selenium.firefox.GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY;
@@ -43,11 +46,24 @@ public class WebDriverFactory {
 
     private static DesiredCapabilities getChromeDesiredCapabilities() {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+
         desiredCapabilities.setJavascriptEnabled(true);
         desiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
         desiredCapabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 
+
+        //TODO add
+        ChromeOptions chromeOptions = addChromeOptions("");
+
         return desiredCapabilities;
+    }
+
+    private static ChromeOptions addChromeOptions(String arg) {
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments(arg);
+
+        return chromeOptions;
     }
 
     private static DesiredCapabilities getFirefoxDesiredCapabilities() {
