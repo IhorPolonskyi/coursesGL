@@ -8,8 +8,6 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.util.List;
-
 import static org.openqa.selenium.chrome.ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
 import static org.openqa.selenium.firefox.GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY;
 
@@ -50,18 +48,15 @@ public class WebDriverFactory {
         desiredCapabilities.setJavascriptEnabled(true);
         desiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
         desiredCapabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
-
-
-        //TODO add
-        ChromeOptions chromeOptions = addChromeOptions("");
+        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, addChromeOptions());
 
         return desiredCapabilities;
     }
 
-    private static ChromeOptions addChromeOptions(String arg) {
+    private static ChromeOptions addChromeOptions() {
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments(arg);
+        chromeOptions.addArguments("start-maximized");
 
         return chromeOptions;
     }

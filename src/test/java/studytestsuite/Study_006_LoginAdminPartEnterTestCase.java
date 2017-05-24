@@ -18,10 +18,10 @@ import static utility.Services.WaiterService.*;
 /**
  * Created by igorp on 11/05/17.
  */
-public class Study_002_LoginAdminPartTestCase extends DefaultTestCase {
+public class Study_006_LoginAdminPartEnterTestCase extends DefaultTestCase {
 
     @Test
-    public void test_002(){
+    public void test_006(){
 
         //get index page
         getURL(Constants.URL, driver);
@@ -42,7 +42,7 @@ public class Study_002_LoginAdminPartTestCase extends DefaultTestCase {
         waitForElementVisible(adminPage.logInButtonCss, driver);
 
         //login to admin panel
-        adminPage.login(adminUser);
+        adminPage.login(adminUser, "enter");
         //TODO fix huck
         waitPageLoader(studyTexts.get("adminPagePartUrl").replace("+","="), driver);
 

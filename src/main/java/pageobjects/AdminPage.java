@@ -1,6 +1,7 @@
 package pageobjects;
 
 import businessobjects.User;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,12 +48,22 @@ public class AdminPage {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-    public void login(User user){
+    public void login(User user, String method){
         sendKeysClear(email, "Email form", user.getEmail(), driver);
 
         sendKeysClear(password, "Password form", user.getPassword(), driver);
 
-        clickOnLogInButton();
+        switch (method){
+            case "button":
+                clickOnLogInButton();
+                break;
+            case "enter":
+                password.sendKeys(Keys.ENTER);
+                break;
+            default:
+                clickOnLogInButton();
+                break;
+        }
     }
 
     public void clickOnCloseTrialPopupCross(){

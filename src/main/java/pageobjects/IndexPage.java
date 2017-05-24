@@ -1,6 +1,7 @@
 package pageobjects;
 
 import businessobjects.User;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -98,11 +99,23 @@ public class IndexPage {
         return loginErrorMessage.get(0).getText();
     }
 
-    public void login(User user){
+    public void login(User user, String method){
         sendKeysClear(email, "Email form", user.getEmail(), driver);
         sendKeysClear(password, "Password form", user.getPassword(), driver);
 
-        clickOnSignInButton();
+        switch (method){
+            case "button":
+                clickOnSignInButton();
+                break;
+            case "enter":
+                password.sendKeys(Keys.ENTER);
+                break;
+            default:
+                clickOnSignInButton();
+                break;
+        }
+
+
     }
 
     public void createAccount(User user){

@@ -18,10 +18,10 @@ import static utility.Services.WaiterService.waitForElementVisible;
 /**
  * Created by igorp on 11/05/17.
  */
-public class Study_001_LoginUserPartTestCase extends DefaultTestCase implements HelpMethods {
+public class Study_005_LoginUserPartEnterTestCase extends DefaultTestCase implements HelpMethods {
 
     @Test
-    public void test_001(){
+    public void test_005(){
 
         //get index page
         getURL(Constants.URL, driver);
@@ -37,7 +37,7 @@ public class Study_001_LoginUserPartTestCase extends DefaultTestCase implements 
         waitForElementVisible(indexPage.signInButtonCss, driver);
 
         //login with returning user
-        indexPage.login(returningUser);
+        indexPage.login(returningUser, "enter");
 
         //if db was cleared, this method try to recreate this user
         huckToCreateAccount(driver);
