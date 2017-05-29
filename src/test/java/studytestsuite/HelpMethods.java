@@ -10,6 +10,7 @@ import java.util.Map;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static utility.Services.FileReaderService.getMap;
 import static utility.Services.ManageUrlService.getURL;
+import static utility.Services.ManageUrlService.refreshPage;
 import static utility.Services.WaiterService.waitForElementVisible;
 
 /**
@@ -34,12 +35,13 @@ public interface HelpMethods {
             waitForElementVisible(indexPage.createAccountButtonCss, driver);
             indexPage.createAccount(returningUser);
             driver.manage().deleteAllCookies();
+            refreshPage(driver);
             getURL(Constants.URL, driver);
 
             waitForElementVisible(indexPage.loginButtonCss, driver);
             indexPage.clickOnLoginButton();
             waitForElementVisible(indexPage.signInButtonCss, driver);
-            indexPage.login(returningUser);
+            indexPage.login(returningUser, "enter");
 
         }
     }
