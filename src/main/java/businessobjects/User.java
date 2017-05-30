@@ -24,7 +24,7 @@ public class User {
         //Generate random email.
         String emailDef = propertyReader.getValue("email");
         if (emailDef != null && emailDef.contains("new")) {
-            this.email = emailDef.substring(0, emailDef.indexOf("@")) + "-" + String.valueOf(System.currentTimeMillis()) + emailDef.substring(emailDef.indexOf("@"));
+            this.email = emailDef.substring(0, emailDef.indexOf("@")) + "+" + String.valueOf(System.currentTimeMillis()) + emailDef.substring(emailDef.indexOf("@"));
         }
 
     }

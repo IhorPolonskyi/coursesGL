@@ -5,15 +5,15 @@
 
     <parameter name="browser" value="chrome"/>
 
-    <test name="Study_001_LoginUserPartButtonTestCase">
+    <test name="Study_001_LoginUserPartTestCase">
         <classes>
-            <class name="studytestsuite.Study_001_LoginUserPartButtonTestCase"/>
+            <class name="studytestsuite.Study_001_LoginUserPartTestCase"/>
         </classes>
     </test>
 
-    <test name="Study_002_LoginAdminPartButtonTestCase">
+    <test name="Study_002_LoginAdminPartTestCase">
         <classes>
-            <class name="studytestsuite.Study_002_LoginAdminPartButtonTestCase"/>
+            <class name="studytestsuite.Study_002_LoginAdminPartTestCase"/>
         </classes>
     </test>
 
@@ -22,19 +22,5 @@
             <class name="studytestsuite.Study_003_CreateUserTestCase"/>
         </classes>
     </test>
-
-    <test name="Study_005_LoginUserPartEnterTestCase">
-        <classes>
-            <class name="studytestsuite.Study_005_LoginUserPartEnterTestCase"/>
-        </classes>
-    </test>
-
-    <test name="Study_006_LoginAdminPartEnterTestCase">
-        <classes>
-            <class name="studytestsuite.Study_006_LoginAdminPartEnterTestCase"/>
-        </classes>
-    </test>
-
-
 
 </suite>
