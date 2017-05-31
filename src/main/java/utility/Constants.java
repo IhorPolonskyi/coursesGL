@@ -6,6 +6,7 @@ package utility;
 public class Constants {
 
     public static final String URL = "https://demostore.x-cart.com/";
+    public static final String CART_PAGE = URL + "?target=cart";
     public static final String ADMIN_LOGIN_PAGE = URL + "admin/admin.php?target=login";
 
 

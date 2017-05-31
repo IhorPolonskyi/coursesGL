@@ -5,10 +5,17 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utility.Services.ManageUrlService;
+import utility.Services.WebElementService;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
+import static utility.Services.ManageUrlService.refreshPage;
 import static utility.Services.WebElementService.clickOnElement;
+import static utility.Services.WebElementService.moveToElement;
 import static utility.Services.WebElementService.sendKeysClear;
 
 /**
@@ -81,6 +88,18 @@ public class IndexPage {
     @FindBy(css = "div[class*=submit] button")
     public WebElement createAccountButtonCss;
 
+    @FindBy(css = "button[class*=add-to-cart]")
+    public List<WebElement> addToCartButtons;
+
+    @FindBy(css = "div[class*=recently-updated]")
+    public WebElement cartButton;
+
+    @FindBy(css = "div[class*=items-list]")
+    public WebElement cartPopUp;
+
+    @FindBy(css = "div[href*=?target=cart]")
+    public WebElement cartItemsNumber;
+
     ////////////////////////////////////////////////////////////////////////////////////////
 
     public void clickOnLoginButton() {
@@ -135,4 +154,39 @@ public class IndexPage {
     public void clickOnCreateAccountButton() {
         clickOnElement(createAccountButtonCss, "Create account button", driver);
     }
+
+    public void addRandomItemsFromIndexPageToCart(int items) {
+
+        List<WebElement> list = new LinkedList<>(addToCartButtons);
+
+        for(int i = 0; i < items; i++){
+            Random random = new Random();
+            int randomItem = random.nextInt(list.size());
+            moveToElement(list.get(randomItem),
+                    "Add to cart button", driver);
+            clickOnElement(list.get(randomItem), "Add to cart button", driver);
+            list.remove(randomItem);
+            refreshPage(driver);
+        }
+    }
+
+    public void addRandomItemsFromIndexPageToCart() {
+        Random random = new Random();
+        int randomItem = random.nextInt(addToCartButtons.size());
+        moveToElement(addToCartButtons.get(randomItem),
+                "Add to cart button", driver);
+        clickOnElement(addToCartButtons.get(randomItem), "Add to cart button", driver);
+        refreshPage(driver);
+    }
+
+    public void clickOnCartButton() {
+        clickOnElement(cartButton, "SignIn button", driver);
+    }
+
+    public String getCartItemsNumber() {
+        return cartItemsNumber.getText();
+    }
+
 }
+
+
