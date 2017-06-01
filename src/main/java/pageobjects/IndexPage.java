@@ -5,18 +5,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utility.Services.ManageUrlService;
-import utility.Services.WebElementService;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import static utility.Services.ManageUrlService.refreshPage;
-import static utility.Services.WebElementService.clickOnElement;
-import static utility.Services.WebElementService.moveToElement;
-import static utility.Services.WebElementService.sendKeysClear;
+import static utility.Services.WebElementService.*;
 
 /**
  * Created by igorp on 11/05/17.
@@ -67,6 +62,9 @@ public class IndexPage {
 
     @FindBy(id = "page-title")
     public WebElement pageTitle;
+
+    @FindBy(className = "add-to-cart-button")
+    public List<WebElement> addToCartButtonsHover;
 
     ////////////////////////////////////////////////////////////////////////////////////
 
@@ -158,14 +156,16 @@ public class IndexPage {
     public void addRandomItemsFromIndexPageToCart(int items) {
 
         List<WebElement> list = new LinkedList<>(addToCartButtons);
+        List<WebElement> listHovers = new LinkedList<>(addToCartButtonsHover);
 
         for(int i = 0; i < items; i++){
             Random random = new Random();
             int randomItem = random.nextInt(list.size());
-            moveToElement(list.get(randomItem),
+            moveToElement(listHovers.get(randomItem),
                     "Add to cart button", driver);
             clickOnElement(list.get(randomItem), "Add to cart button", driver);
             list.remove(randomItem);
+            listHovers.remove(randomItem);
             refreshPage(driver);
         }
     }
@@ -173,7 +173,7 @@ public class IndexPage {
     public void addRandomItemsFromIndexPageToCart() {
         Random random = new Random();
         int randomItem = random.nextInt(addToCartButtons.size());
-        moveToElement(addToCartButtons.get(randomItem),
+        moveToElement(addToCartButtonsHover.get(randomItem),
                 "Add to cart button", driver);
         clickOnElement(addToCartButtons.get(randomItem), "Add to cart button", driver);
         refreshPage(driver);
