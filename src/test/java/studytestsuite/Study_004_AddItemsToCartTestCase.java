@@ -4,7 +4,6 @@ import org.testng.annotations.Test;
 import pageobjects.CartPage;
 import pageobjects.IndexPage;
 import utility.Constants;
-import utility.Services.WaiterService;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static org.testng.Assert.assertTrue;
@@ -14,7 +13,7 @@ import static utility.Services.WaiterService.waitForElementVisible;
 /**
  * Created by user on 31.05.17.
  */
-public class Study_005_AddItemsToCartTestCase extends DefaultTestCase {
+public class Study_004_AddItemsToCartTestCase extends DefaultTestCase {
 
     @Test
     public void test_005(){

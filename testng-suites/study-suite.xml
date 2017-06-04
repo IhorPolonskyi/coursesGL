@@ -23,9 +23,9 @@
         </classes>
     </test>
 
-    <test name="Study_005_AddItemsToCartTestCase">
+    <test name="Study_004_AddItemsToCartTestCase">
         <classes>
-            <class name="studytestsuite.Study_005_AddItemsToCartTestCase"/>
+            <class name="studytestsuite.Study_004_AddItemsToCartTestCase"/>
         </classes>
     </test>
 

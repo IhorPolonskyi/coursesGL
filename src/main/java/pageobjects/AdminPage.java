@@ -23,7 +23,6 @@ public class AdminPage {
     @FindBy(name = "login")
     public WebElement email;
 
-    @FindBy(name = "password")
     public WebElement password;
 
     @FindBy(xpath = "//button[contains(@class,'submit')]")
@@ -35,7 +34,6 @@ public class AdminPage {
     @FindBy(className = "ui-dialog-titlebar-close")
     public WebElement closeTrialPopUpCross;
 
-    @FindBy(id = "leftMenu")
     public WebElement leftMenu;
 
 

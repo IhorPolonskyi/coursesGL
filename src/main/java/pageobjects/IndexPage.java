@@ -65,7 +65,6 @@ public class IndexPage {
     @FindBy(xpath = "//button[contains(@class,'titlebar-close')]")
     public WebElement closeSignInPopUpCrossXpath;
 
-    @FindBy(id = "page-title")
     public WebElement pageTitle;
 
     ////////////////////////////////////////////////////////////////////////////////////
