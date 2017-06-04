@@ -4,3 +4,4 @@ adminPagePartUrl=target+main
 createdUserPagePartUrl=?target+address_book&profile_id+
 pageTitle=My account
 errorMessage=Invalid login or password
+emptyCartText=Your cart is empty

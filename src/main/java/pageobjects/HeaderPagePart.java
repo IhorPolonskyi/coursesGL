@@ -17,20 +17,11 @@ public class HeaderPagePart {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//li[contains(@class,'logoff')]")
-    public WebElement logOffXpath;
-
-    @FindBy(xpath = "//li[@class='tab admin']//a")
-    public WebElement adminLoginLinkXpath;
-
-    ////////////////////////////////////////////////////////////////////////
     @FindBy(css = "li[class*=logoff]")
     public WebElement logOffCss;
 
     @FindBy(css = "li.tab.admin a")
     public WebElement adminLoginLinkCss;
-    //////////////////////////////////////////////////////////////////////////
-
 
     public void clickOnGoToAdminPanelLink() {
         clickOnElement(adminLoginLinkCss, "Admin login link", driver);

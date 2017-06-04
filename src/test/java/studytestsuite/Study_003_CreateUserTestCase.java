@@ -56,7 +56,8 @@ public class Study_003_CreateUserTestCase extends DefaultTestCase {
         //cookies check
         waitForCookie(studyTexts.get("userLoggedInCookie"), driver);
         assertTrue(verifyCookieIsSet(studyTexts.get("userLoggedInCookie"), driver));
-        assertEquals(getCookieValue(studyTexts.get("userLoggedInCookie"), driver), newUser.getEmail().replace("@", "%40"));
+        assertEquals(getCookieValue(studyTexts.get("userLoggedInCookie"), driver), newUser.getEmail()
+                .replace("@", "%40").replace("+", "%2B"));
 
     }
 }

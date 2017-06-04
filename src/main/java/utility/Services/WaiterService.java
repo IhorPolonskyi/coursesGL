@@ -23,6 +23,9 @@ public class WaiterService {
         catch (TimeoutException e){
             warn("ELEMENT: \"" + element + "\" is not presents.");
         }
+        catch (StaleElementReferenceException e){
+            warn("ELEMENT: \"" + element + "\" is not presents.");
+        }
 
     }
 
@@ -66,9 +69,7 @@ public class WaiterService {
         }
     }
 
-
     public  static void pageLoaderWaitJS(WebDriver driver){
-
         try {
             WebDriverWait wait = new WebDriverWait(driver, Constants.PAGE_TIMEOUT);
             wait.until((WebDriver webDriver) -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
@@ -77,6 +78,19 @@ public class WaiterService {
             warn(e);
         }
     }
+
+    public static void waitForTextVisible(String text, WebElement element, WebDriver driver) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Constants.ELEMENT_TIMEOUT);
+            wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+            info("TEXT: \"" + text + "\" is present.");
+        } catch (TimeoutException e) {
+            assertTrue(false, "TEXT: \"" + text + "\" is not presents.");
+        } catch (NoSuchElementException e) {
+            assertTrue(false, "This element not found.");
+        }
+    }
+
 
     //TODO jsReturnsValue
 

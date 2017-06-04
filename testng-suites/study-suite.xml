@@ -29,4 +29,9 @@
         </classes>
     </test>
 
+    <test name="Study_005_AddItemAndDeleteTestCase">
+        <classes>
+            <class name="studytestsuite.Study_005_AddItemAndDeleteTestCase"/>
+        </classes>
+    </test>
 </suite>

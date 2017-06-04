@@ -16,25 +16,26 @@ import static utility.Services.WaiterService.waitForElementVisible;
 public class Study_004_AddItemsToCartTestCase extends DefaultTestCase {
 
     @Test
-    public void test_005(){
+    public void test_004(){
 
         //get index page
         getURL(Constants.URL, driver);
 
         IndexPage indexPage = initElements(driver, IndexPage.class);
-        indexPage.addRandomItemsFromIndexPageToCart();
+        indexPage.addRandomItemsFromIndexPageToCart(2);
 
         indexPage.clickOnCartButton();
         waitForElementVisible(indexPage.cartPopUp, driver);
 
-        assertTrue(indexPage.getCartItemsNumber().contains(Integer.toString(1)),
+        //TODO upgrade to equals
+        assertTrue(indexPage.getCartItemsNumber().contains(Integer.toString(2)),
                 "Incorrect amount of items in cart");
 
         //get cart page
         getURL(Constants.CART_PAGE, driver);
 
         CartPage cartPage = initElements(driver, CartPage.class);
-        assertTrue(cartPage.getCartItemsNumber().contains(Integer.toString(1)),
+        assertTrue(cartPage.getCartItemsNumber().contains(Integer.toString(2)),
                 "Incorrect amount of items in cart");
 
     }

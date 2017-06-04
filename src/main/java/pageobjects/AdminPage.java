@@ -25,26 +25,13 @@ public class AdminPage {
 
     public WebElement password;
 
-    @FindBy(xpath = "//button[contains(@class,'submit')]")
-    public WebElement logInButtonXpath;
-
-    @FindBy(xpath = "//div[contains(@class,'forgot')]")
-    public WebElement forgotPasswordLinkXpath;
-
     @FindBy(className = "ui-dialog-titlebar-close")
     public WebElement closeTrialPopUpCross;
 
     public WebElement leftMenu;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////
-    @FindBy(css = "button[class*=submit]")
+    @FindBy(css = "[type=submit]")
     public WebElement logInButtonCss;
-
-    @FindBy(css = "div[class*=forgot]")
-    public WebElement forgotPasswordLinkCss;
-
-/////////////////////////////////////////////////////////////////////////////////////////
 
     public void login(User user, String method){
         sendKeysClear(email, "Email form", user.getEmail(), driver);

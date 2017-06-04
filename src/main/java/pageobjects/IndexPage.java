@@ -1,16 +1,25 @@
 package pageobjects;
 
+import businessobjects.Item;
 import businessobjects.User;
+import org.apache.commons.collections.ListUtils;
+import org.apache.http.impl.conn.tsccm.WaitingThreadAborter;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utility.Constants;
+import utility.Services.WaiterService;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import static utility.Services.ManageUrlService.refreshPage;
+import static org.openqa.selenium.support.PageFactory.initElements;
+import static utility.Services.ManageUrlService.getURL;
+import static utility.Services.WaiterService.pageLoaderWaitJS;
+import static utility.Services.WaiterService.sleep;
+import static utility.Services.WaiterService.waitForElementVisible;
 import static utility.Services.WebElementService.*;
 
 /**
@@ -42,30 +51,11 @@ public class IndexPage {
     @FindBy(id = "password-conf")
     public WebElement passwordConfirmCreate;
 
-    @FindBy(xpath = "//*[contains(@class,'header_bar-sign_in')]//button")
-    public WebElement loginButtonXpath;
-
-    @FindBy(xpath = "//td//button[contains(@class,'submit')]")
-    public WebElement signInButtonXpath;
-
-    @FindBy(xpath = "//div[contains(@class,'submit')]//button")
-    public WebElement createAccountButtonXpath;
-
-    @FindBy(xpath = "//a[contains(@class,'create-account-link')]")
-    public WebElement createAccountLinkXpath;
-
-    @FindBy(xpath = "//a[contains(@class,'forgot')]")
-    public WebElement forgotPasswordLinkXpath;
-
-    @FindBy(xpath = "//button[contains(@class,'titlebar-close')]")
-    public WebElement closeSignInPopUpCrossXpath;
-
+    @FindBy(id = "page-title")
     public WebElement pageTitle;
 
     @FindBy(className = "add-to-cart-button")
     public List<WebElement> addToCartButtonsHover;
-
-    ////////////////////////////////////////////////////////////////////////////////////
 
     @FindBy(css = "[class*=header_bar-sign_in] button")
     public WebElement loginButtonCss;
@@ -73,20 +63,11 @@ public class IndexPage {
     @FindBy(css = "td button[class*=submit]")
     public WebElement signInButtonCss;
 
-    @FindBy(css = "a[class*=create-account-link]")
+    @FindBy(css = "[class*=create-account-link]")
     public WebElement createAccountLinkCss;
 
-    @FindBy(css = "a[class*=forgot]")
-    public WebElement forgotPasswordLinkCss;
-
-    @FindBy(css = "button[class*=titlebar-close]")
-    public WebElement closeSignInPopUpCrossCss;
-
-    @FindBy(css = "div[class*=submit] button")
+    @FindBy(css = "[class*=submit] button")
     public WebElement createAccountButtonCss;
-
-    @FindBy(css = "button[class*=add-to-cart]")
-    public List<WebElement> addToCartButtons;
 
     @FindBy(css = "div[class*=recently-updated]")
     public WebElement cartButton;
@@ -94,10 +75,14 @@ public class IndexPage {
     @FindBy(css = "div[class*=items-list]")
     public WebElement cartPopUp;
 
-    @FindBy(css = "div[href*=?target=cart]")
+    @FindBy(xpath = "//a[@href='?target=cart']")
     public WebElement cartItemsNumber;
 
-    ////////////////////////////////////////////////////////////////////////////////////////
+    @FindBy(xpath = "//*[contains(@class,'bestsellers')]/div/div/div/ul/li/div")
+    public List<WebElement> bestsellersItems;
+
+    @FindBy(xpath = "//*[contains(@class,'featured')]/div/div/div/ul/li/div")
+    public List<WebElement> featuredItems;
 
     public void clickOnLoginButton() {
         clickOnElement(loginButtonCss, "Login Button", driver);
@@ -130,8 +115,6 @@ public class IndexPage {
                 clickOnSignInButton();
                 break;
         }
-
-
     }
 
     public void createAccount(User user){
@@ -152,34 +135,43 @@ public class IndexPage {
         clickOnElement(createAccountButtonCss, "Create account button", driver);
     }
 
-    public void addRandomItemsFromIndexPageToCart(int items) {
+    public void addRandomItemsFromIndexPageToCart(int item) {
 
-        List<WebElement> list = new LinkedList<>(addToCartButtons);
-        List<WebElement> listHovers = new LinkedList<>(addToCartButtonsHover);
+        ItemPage itemPage = initElements(driver, ItemPage.class);
 
-        for(int i = 0; i < items; i++){
-            Random random = new Random();
-            int randomItem = random.nextInt(list.size());
-            moveToElement(listHovers.get(randomItem),
-                    "Add to cart button", driver);
-            clickOnElement(list.get(randomItem), "Add to cart button", driver);
-            list.remove(randomItem);
-            listHovers.remove(randomItem);
-            refreshPage(driver);
-        }
+        //TODO fix add to cart
+            for (int i = 0; i < item; i++) {
+                Random random = new Random();
+                int randomItem = random.nextInt(featuredItems.size());
+
+                waitForElementVisible(featuredItems.get(randomItem), driver);
+                clickOnElement(featuredItems.get(randomItem), "Item page", driver);
+
+                if (!driver.getCurrentUrl().equals(Constants.URL)) {
+                    itemPage.clickOnAddToCartButton();
+                    waitForElementVisible(itemPage.addToCartPopUp, driver);
+                    getURL(Constants.URL, driver);
+                }
+            }
     }
 
-    public void addRandomItemsFromIndexPageToCart() {
+    public void addRandomItemsFromIndexPageToCart(Item item) {
+        ItemPage itemPage = initElements(driver, ItemPage.class);
+        List<WebElement> list = ListUtils.union(bestsellersItems,featuredItems);
+
+        //TODO fix add to cart
         Random random = new Random();
-        int randomItem = random.nextInt(addToCartButtons.size());
-        moveToElement(addToCartButtonsHover.get(randomItem),
-                "Add to cart button", driver);
-        clickOnElement(addToCartButtons.get(randomItem), "Add to cart button", driver);
-        refreshPage(driver);
+        int randomItem = random.nextInt(list.size());
+        clickOnElement(list.get(randomItem), "Item page", driver);
+        waitForElementVisible(itemPage.addToCartButton, driver);
+        item.setName(itemPage.getItemName());
+        itemPage.clickOnAddToCartButton();
+        waitForElementVisible(itemPage.addToCartPopUp, driver);
+        getURL(Constants.URL, driver);
     }
 
     public void clickOnCartButton() {
-        clickOnElement(cartButton, "SignIn button", driver);
+        clickOnElement(cartButton, "Cart button", driver);
     }
 
     public String getCartItemsNumber() {
