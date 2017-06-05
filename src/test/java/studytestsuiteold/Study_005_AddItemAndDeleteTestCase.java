@@ -1,19 +1,16 @@
-package studytestsuite;
+package studytestsuiteold;
 
 import businessobjects.Item;
 import org.testng.annotations.Test;
-import pageobjects.CartPage;
-import pageobjects.IndexPage;
+import pageobjectsold.CartPage;
+import pageobjectsold.IndexPage;
 import utility.Constants;
-import utility.Services.WaiterService;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static studytestsuite.HelpMethods.studyTexts;
+import static studytestsuiteold.HelpMethods.studyTexts;
 import static utility.Services.ManageUrlService.getURL;
-import static utility.Services.WaiterService.pageLoaderWaitJS;
-import static utility.Services.WaiterService.waitForElementVisible;
 import static utility.Services.WaiterService.waitForTextVisible;
 
 /**

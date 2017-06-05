@@ -11,11 +11,11 @@ import static utility.Services.WebElementService.clickOnElement;
 /**
  * Created by user on 04.06.17.
  */
-public class ItemPage {
+public class ItemPageNew {
 
     protected WebDriver driver;
 
-    public ItemPage(WebDriver driver) {
+    public ItemPageNew(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -29,7 +29,7 @@ public class ItemPage {
     @FindBy(css = ".fn.title")
     public WebElement itemName;
 
-    public ItemPage clickOnAddToCartButton() {
+    public ItemPageNew clickOnAddToCartButton() {
         clickOnElement(addToCartButton, "Add to cart button", driver);
         return this;
     }

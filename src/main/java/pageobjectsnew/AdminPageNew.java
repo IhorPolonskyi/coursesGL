@@ -7,17 +7,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static utility.Services.WaiterService.waitForElementVisible;
+import static utility.Services.WaiterService.waitPageLoader;
 import static utility.Services.WebElementService.clickOnElement;
 import static utility.Services.WebElementService.sendKeysClear;
 
 /**
  * Created by user on 14.05.17.
  */
-public class AdminPage {
+public class AdminPageNew {
 
     protected WebDriver driver;
 
-    public AdminPage(WebDriver driver) {
+    public AdminPageNew(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -36,7 +38,7 @@ public class AdminPage {
     @FindBy(css = "[type=submit]")
     public WebElement logInButtonCss;
 
-    public AdminPage login(User user, String method){
+    public AdminPageNew login(User user, String method){
         sendKeysClear(email, "Email form", user.getEmail(), driver);
 
         sendKeysClear(password, "Password form", user.getPassword(), driver);
@@ -55,15 +57,21 @@ public class AdminPage {
         return this;
     }
 
-    public AdminPage clickOnCloseTrialPopupCross(){
+    public AdminPageNew clickOnCloseTrialPopupCross(){
+        waitForElementVisible(closeTrialPopUpCross, driver);
         clickOnElement(closeTrialPopUpCross, "Close trial popup cross", driver);
         return this;
     }
 
-    public AdminPage clickOnLogInButton() {
+    public AdminPageNew clickOnLogInButton() {
+        waitForElementVisible(logInButtonCss, driver);
         clickOnElement(logInButtonCss, "Login button", driver);
         return this;
     }
 
+    public AdminPageNew waitAdminPageLoad(String url) {
+        waitPageLoader(url.replace("+","="), driver);
+        return this;
+    }
 
 }

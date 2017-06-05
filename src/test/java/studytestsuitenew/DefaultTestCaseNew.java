@@ -1,4 +1,4 @@
-package studytestsuiteold;
+package studytestsuitenew;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -10,10 +10,11 @@ import utility.Log;
 import java.util.concurrent.TimeUnit;
 
 import static utility.Services.WebDriverFactory.getDriverInstance;
+
 /**
  * Created by igorp on 11/05/17.
  */
-public class DefaultTestCase {
+public class DefaultTestCaseNew {
 
     public WebDriver driver;
 

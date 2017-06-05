@@ -13,11 +13,11 @@ import static utility.Services.WebElementService.clickOnElement;
 /**
  * Created by user on 31.05.17.
  */
-public class CartPage {
+public class CartPageNew {
 
     protected WebDriver driver;
 
-    public CartPage(WebDriver driver) {
+    public CartPageNew(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

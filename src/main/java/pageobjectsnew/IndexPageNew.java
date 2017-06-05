@@ -17,6 +17,7 @@ import java.util.Random;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static utility.Services.ManageUrlService.getURL;
+import static utility.Services.WaiterService.waitForCookie;
 import static utility.Services.WaiterService.waitForElementVisible;
 import static utility.Services.WebElementService.clickOnElement;
 import static utility.Services.WebElementService.sendKeysClear;
@@ -24,11 +25,11 @@ import static utility.Services.WebElementService.sendKeysClear;
 /**
  * Created by igorp on 11/05/17.
  */
-public class IndexPage {
+public class IndexPageNew {
 
     protected WebDriver driver;
 
-    public IndexPage(WebDriver driver) {
+    public IndexPageNew(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -84,18 +85,31 @@ public class IndexPage {
     @FindBy(xpath = "//*[contains(@class,'featured')]/div/div/div/ul/li/div")
     public List<WebElement> featuredItems;
 
-    public IndexPage clickOnLoginButton() {
+    @FindBy(css = "li[class*=logoff]")
+    public WebElement logOffCss;
+
+    @FindBy(css = "li.tab.admin a")
+    public WebElement adminLoginLinkCss;
+
+    public IndexPageNew clickOnGoToAdminPanelLink() {
+        clickOnElement(adminLoginLinkCss, "Admin login link", driver);
+        return this;
+    }
+
+    public IndexPageNew clickOnLoginButton() {
+        waitForElementVisible(loginButtonCss, driver);
         clickOnElement(loginButtonCss, "Login Button", driver);
         return this;
     }
 
-    public IndexPage openSite() {
+    public IndexPageNew openSite() {
         //get index page
         getURL(Constants.URL, driver);
         return this;
     }
 
-    public IndexPage clickOnCreateAccountLink() {
+    public IndexPageNew clickOnCreateAccountLink() {
+        waitForElementVisible(createAccountLinkCss, driver);
         clickOnElement(createAccountLinkCss, "Create account link", driver);
         return this;
     }
@@ -108,7 +122,7 @@ public class IndexPage {
         return loginErrorMessage.get(0).getText();
     }
 
-    public IndexPage login(User user, String method){
+    public IndexPageNew login(User user, String method){
         sendKeysClear(email, "Email form", user.getEmail(), driver);
         sendKeysClear(password, "Password form", user.getPassword(), driver);
 
@@ -126,7 +140,9 @@ public class IndexPage {
         return this;
     }
 
-    public IndexPage createAccount(User user){
+    public IndexPageNew createAccount(User user){
+        waitForElementVisible(createAccountButtonCss, driver);
+
         sendKeysClear(emailCreate, "Email form create user", user.getEmail(), driver);
 
         sendKeysClear(passwordCreate, "Password form create user", user.getPassword(), driver);
@@ -138,17 +154,19 @@ public class IndexPage {
         return this;
     }
 
-    public IndexPage clickOnSignInButton() {
+    public IndexPageNew clickOnSignInButton() {
+        waitForElementVisible(signInButtonCss, driver);
         clickOnElement(signInButtonCss, "SignIn button", driver);
         return this;
     }
 
-    public IndexPage clickOnCreateAccountButton() {
+    public IndexPageNew clickOnCreateAccountButton() {
+        waitForElementVisible(createAccountButtonCss, driver);
         clickOnElement(createAccountButtonCss, "Create account button", driver);
         return this;
     }
 
-    public IndexPage addRandomItemsFromIndexPageToCart(int item) {
+    public IndexPageNew addRandomItemsFromIndexPageToCart(int item) {
 
         ItemPage itemPage = initElements(driver, ItemPage.class);
 
@@ -173,7 +191,7 @@ public class IndexPage {
         return this;
         }
 
-    public IndexPage addRandomItemsFromIndexPageToCart(Item item) {
+    public IndexPageNew addRandomItemsFromIndexPageToCart(Item item) {
         ItemPage itemPage = initElements(driver, ItemPage.class);
         List<WebElement> list = ListUtils.union(bestsellersItems,featuredItems);
 
@@ -196,7 +214,8 @@ public class IndexPage {
         return this;
     }
 
-    public IndexPage clickOnCartButton() {
+    public IndexPageNew clickOnCartButton() {
+        waitForElementVisible(cartButton, driver);
         clickOnElement(cartButton, "Cart button", driver);
         return this;
     }
@@ -205,6 +224,15 @@ public class IndexPage {
         return cartItemsNumber.getText();
     }
 
+    public IndexPageNew waitForPageTitle() {
+        waitForElementVisible(pageTitle, driver);
+        return this;
+    }
+
+    public IndexPageNew waitForCookieIsPresent(String cookieName) {
+        waitForCookie(cookieName, driver);
+        return this;
+    }
 }
 
 

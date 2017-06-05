@@ -1,16 +1,16 @@
-package studytestsuite;
+package studytestsuiteold;
 
 import org.testng.annotations.Test;
-import pageobjects.AdminPage;
-import pageobjects.HeaderPagePart;
+import pageobjectsold.AdminPage;
+import pageobjectsold.HeaderPagePart;
 import utility.Constants;
 import utility.DataProviders;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static studytestsuite.HelpMethods.adminUser;
-import static studytestsuite.HelpMethods.studyTexts;
+import static studytestsuiteold.HelpMethods.adminUser;
+import static studytestsuiteold.HelpMethods.studyTexts;
 import static utility.Services.AdditionalService.verifyCookieIsSet;
 import static utility.Services.ManageUrlService.getCurrentURL;
 import static utility.Services.ManageUrlService.getURL;

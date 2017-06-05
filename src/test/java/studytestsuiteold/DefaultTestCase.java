@@ -1,4 +1,4 @@
-package studytestsuite;
+package studytestsuiteold;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -7,7 +7,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import utility.Log;
 
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import static utility.Services.WebDriverFactory.getDriverInstance;

@@ -1,4 +1,4 @@
-package studytestsuiteold;
+package studytestsuitenew;
 
 import businessobjects.User;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,7 @@ import static utility.Services.WaiterService.waitForElementVisible;
 /**
  * Created by user on 14.05.17.
  */
-public interface HelpMethods {
+public interface HelpMethodsNew {
 
     User returningUser = new User("properties/user/defaultUser.properties");
     User adminUser = new User("properties/user/adminUser.properties");

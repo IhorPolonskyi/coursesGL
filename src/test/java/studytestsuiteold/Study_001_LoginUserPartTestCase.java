@@ -1,8 +1,8 @@
-package studytestsuite;
+package studytestsuiteold;
 
 import org.testng.annotations.Test;
-import pageobjects.HeaderPagePart;
-import pageobjects.IndexPage;
+import pageobjectsold.HeaderPagePart;
+import pageobjectsold.IndexPage;
 import utility.Constants;
 import utility.DataProviders;
 

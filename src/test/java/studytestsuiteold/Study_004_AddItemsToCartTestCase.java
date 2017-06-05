@@ -1,8 +1,8 @@
-package studytestsuite;
+package studytestsuiteold;
 
 import org.testng.annotations.Test;
-import pageobjects.CartPage;
-import pageobjects.IndexPage;
+import pageobjectsold.CartPage;
+import pageobjectsold.IndexPage;
 import utility.Constants;
 
 import static org.openqa.selenium.support.PageFactory.initElements;

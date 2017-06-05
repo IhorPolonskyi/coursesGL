@@ -1,8 +1,8 @@
-package studytestsuite;
+package studytestsuiteold;
 
 import businessobjects.User;
 import org.openqa.selenium.WebDriver;
-import pageobjects.IndexPage;
+import pageobjectsold.IndexPage;
 import utility.Constants;
 
 import java.util.Map;
