@@ -3,24 +3,21 @@ package pageobjects;
 import businessobjects.Item;
 import businessobjects.User;
 import org.apache.commons.collections.ListUtils;
-import org.apache.http.impl.conn.tsccm.WaitingThreadAborter;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utility.Constants;
-import utility.Services.WaiterService;
 
 import java.util.List;
 import java.util.Random;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 import static utility.Services.ManageUrlService.getURL;
-import static utility.Services.WaiterService.pageLoaderWaitJS;
-import static utility.Services.WaiterService.sleep;
 import static utility.Services.WaiterService.waitForElementVisible;
-import static utility.Services.WebElementService.*;
+import static utility.Services.WebElementService.clickOnElement;
+import static utility.Services.WebElementService.sendKeysClear;
 
 /**
  * Created by igorp on 11/05/17.
@@ -139,7 +136,7 @@ public class IndexPage {
 
         ItemPage itemPage = initElements(driver, ItemPage.class);
 
-        //TODO fix add to cart
+            //TODO fix add to cart
             for (int i = 0; i < item; i++) {
                 Random random = new Random();
                 int randomItem = random.nextInt(featuredItems.size());
@@ -147,13 +144,17 @@ public class IndexPage {
                 waitForElementVisible(featuredItems.get(randomItem), driver);
                 clickOnElement(featuredItems.get(randomItem), "Item page", driver);
 
-                if (!driver.getCurrentUrl().equals(Constants.URL)) {
+                try {
                     itemPage.clickOnAddToCartButton();
                     waitForElementVisible(itemPage.addToCartPopUp, driver);
                     getURL(Constants.URL, driver);
                 }
+                catch (TimeoutException e) {
+                      getURL(Constants.URL, driver);
+                      i--;
+                }
             }
-    }
+        }
 
     public void addRandomItemsFromIndexPageToCart(Item item) {
         ItemPage itemPage = initElements(driver, ItemPage.class);
@@ -163,11 +164,19 @@ public class IndexPage {
         Random random = new Random();
         int randomItem = random.nextInt(list.size());
         clickOnElement(list.get(randomItem), "Item page", driver);
-        waitForElementVisible(itemPage.addToCartButton, driver);
-        item.setName(itemPage.getItemName());
-        itemPage.clickOnAddToCartButton();
-        waitForElementVisible(itemPage.addToCartPopUp, driver);
-        getURL(Constants.URL, driver);
+
+        try{
+            waitForElementVisible(itemPage.addToCartButton, driver);
+            item.setName(itemPage.getItemName());
+            itemPage.clickOnAddToCartButton();
+            waitForElementVisible(itemPage.addToCartPopUp, driver);
+            getURL(Constants.URL, driver);
+        }
+        catch (TimeoutException e) {
+            getURL(Constants.URL, driver);
+            addRandomItemsFromIndexPageToCart(item);
+        }
+
     }
 
     public void clickOnCartButton() {
