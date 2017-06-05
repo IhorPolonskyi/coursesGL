@@ -7,31 +7,30 @@
 
     <test name="Study_001_LoginUserPartTestCase">
         <classes>
-            <class name="studytestsuite.Study_001_LoginUserPartTestCase"/>
+            <class name="studytestsuiteold.Study_001_LoginUserPartTestCase"/>
         </classes>
     </test>
 
     <test name="Study_002_LoginAdminPartTestCase">
         <classes>
-            <class name="studytestsuite.Study_002_LoginAdminPartTestCase"/>
+            <class name="studytestsuiteold.Study_002_LoginAdminPartTestCase"/>
         </classes>
     </test>
 
     <test name="Study_003_CreateUserTestCase">
         <classes>
-            <class name="studytestsuite.Study_003_CreateUserTestCase"/>
+            <class name="studytestsuiteold.Study_003_CreateUserTestCase"/>
         </classes>
     </test>
-
     <test name="Study_004_AddItemsToCartTestCase">
         <classes>
-            <class name="studytestsuite.Study_004_AddItemsToCartTestCase"/>
+            <class name="studytestsuiteold.Study_004_AddItemsToCartTestCase"/>
         </classes>
     </test>
 
     <test name="Study_005_AddItemAndDeleteTestCase">
         <classes>
-            <class name="studytestsuite.Study_005_AddItemAndDeleteTestCase"/>
+            <class name="studytestsuiteold.Study_005_AddItemAndDeleteTestCase"/>
         </classes>
     </test>
 </suite>

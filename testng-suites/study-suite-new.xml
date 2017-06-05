@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Study suite" >
+
+    <parameter name="browser" value="chrome"/>
+
+    <test name="Study_001_LoginUserPartTestCase">
+        <classes>
+            <class name="studytestsuiteold.Study_001_LoginUserPartTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Study_002_LoginAdminPartTestCase">
+        <classes>
+            <class name="studytestsuiteold.Study_002_LoginAdminPartTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Study_003_CreateUserTestCase">
+        <classes>
+            <class name="studytestsuiteold.Study_003_CreateUserTestCase"/>
+        </classes>
+    </test>
+    <test name="Study_004_AddItemsToCartTestCase">
+        <classes>
+            <class name="studytestsuiteold.Study_004_AddItemsToCartTestCase"/>
+        </classes>
+    </test>
+
+    <test name="Study_005_AddItemAndDeleteTestCase">
+        <classes>
+            <class name="studytestsuiteold.Study_005_AddItemAndDeleteTestCase"/>
+        </classes>
+    </test>
+</suite>
