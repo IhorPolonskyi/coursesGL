@@ -11,5 +11,11 @@
         </classes>
     </test>
 
+    <test name="Study_002_ItemsTests">
+        <classes>
+            <class name="studytestsuitenew.Study_002_ItemsTests"/>
+        </classes>
+    </test>
+
 
 </suite>

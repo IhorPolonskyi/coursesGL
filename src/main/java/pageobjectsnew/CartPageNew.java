@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.LinkedList;
 import java.util.List;
 
+import static utility.Services.WaiterService.waitForTextVisible;
 import static utility.Services.WebElementService.clickOnElement;
 
 /**
@@ -31,12 +32,18 @@ public class CartPageNew {
     @FindBy(xpath = "//*[@class='remove next-previous-assigned']")
     public List<WebElement> removeFromCart;
 
-    public String getCartItemsNumber() {
+    public String getHeaderTextInCart() {
         return cartItemsNumber.getText();
     }
 
-    public void removeFirstItemFromCart() {
+    public CartPageNew waitForHeaderTextInCart(String text) {
+        waitForTextVisible(text, cartItemsNumber, driver);
+        return this;
+    }
+
+    public CartPageNew removeFirstItemFromCart() {
         clickOnElement(removeFromCart.get(0), "Remove from cart", driver);
+        return this;
     }
 
     public String getFirstItemName() {

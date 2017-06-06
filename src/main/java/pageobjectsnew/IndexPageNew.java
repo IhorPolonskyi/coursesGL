@@ -191,7 +191,7 @@ public class IndexPageNew {
         return this;
         }
 
-    public IndexPageNew addRandomItemsFromIndexPageToCart(Item item) {
+    public IndexPageNew addRandomItemFromIndexPageToCart(Item item) {
         ItemPage itemPage = initElements(driver, ItemPage.class);
         List<WebElement> list = ListUtils.union(bestsellersItems,featuredItems);
 
@@ -209,7 +209,7 @@ public class IndexPageNew {
         }
         catch (TimeoutException e) {
             getURL(Constants.URL, driver);
-            addRandomItemsFromIndexPageToCart(item);
+            addRandomItemFromIndexPageToCart(item);
         }
         return this;
     }
@@ -231,6 +231,11 @@ public class IndexPageNew {
 
     public IndexPageNew waitForCookieIsPresent(String cookieName) {
         waitForCookie(cookieName, driver);
+        return this;
+    }
+
+    public IndexPageNew getCartPage() {
+        getURL(Constants.CART_PAGE, driver);
         return this;
     }
 }

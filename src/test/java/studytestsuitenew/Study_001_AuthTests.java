@@ -6,7 +6,6 @@ import pageobjectsnew.IndexPageNew;
 import studytestsuiteold.HelpMethods;
 import utility.DataProviders;
 
-import static org.openqa.selenium.support.PageFactory.initElements;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static studytestsuitenew.HelpMethodsNew.adminUser;
@@ -25,7 +24,7 @@ public class Study_001_AuthTests extends DefaultTestCaseNew {
 
     @Test(dataProvider = "loginMethod", dataProviderClass = DataProviders.class)
     public void test_001_UserShouldBeLoginUserPart(String method) {
-        IndexPageNew indexPage = new IndexPageNew(driver)
+        new IndexPageNew(driver)
                 .openSite()
                 .clickOnLoginButton()
                 .login(returningUser, method)
@@ -54,8 +53,8 @@ public class Study_001_AuthTests extends DefaultTestCaseNew {
         assertTrue(adminPage.leftMenu.isDisplayed());
 
         //cookies asserts
-        waitForCookie(HelpMethods.studyTexts.get("adminLoggedInCookie"), driver);
-        assertTrue(verifyCookieIsSet(HelpMethods.studyTexts.get("adminLoggedInCookie"), driver));
+        waitForCookie(studyTexts.get("adminLoggedInCookie"), driver);
+        assertTrue(verifyCookieIsSet(studyTexts.get("adminLoggedInCookie"), driver));
     }
 
     @Test
