@@ -8,10 +8,7 @@ import utility.DataProviders;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static studytestsuitenew.HelpMethodsNew.adminUser;
-import static studytestsuitenew.HelpMethodsNew.studyTexts;
-import static studytestsuiteold.HelpMethods.newUser;
-import static studytestsuiteold.HelpMethods.returningUser;
+import static studytestsuitenew.HelpMethodsNew.*;
 import static utility.Services.AdditionalService.getCookieValue;
 import static utility.Services.AdditionalService.verifyCookieIsSet;
 import static utility.Services.ManageUrlService.getCurrentURL;
@@ -25,9 +22,9 @@ public class Study_001_AuthTests extends DefaultTestCaseNew {
     @Test(dataProvider = "loginMethod", dataProviderClass = DataProviders.class)
     public void test_001_UserShouldBeLoginUserPart(String method) {
         new IndexPageNew(driver)
-                .openSite()
-                .clickOnLoginButton()
+                .get()
                 .login(returningUser, method)
+                .huckToCreateAccount(returningUser, studyTexts.get("errorMessage"), driver)
                 .waitForPageTitle()
                 .waitForCookieIsPresent(studyTexts.get("userLoggedInCookie"));
 
@@ -39,17 +36,15 @@ public class Study_001_AuthTests extends DefaultTestCaseNew {
 
     @Test(dataProvider = "loginMethod", dataProviderClass = DataProviders.class)
     public void test_002_UserShouldBeLoginAdminPart(String method) {
-        IndexPageNew indexPage = new IndexPageNew(driver)
-                .openSite()
-                .clickOnGoToAdminPanelLink();
 
         AdminPageNew adminPage = new AdminPageNew(driver)
+                .get()
                 .login(adminUser, method)
                 .waitAdminPageLoad(studyTexts.get("adminPagePartUrl"))
                 .clickOnCloseTrialPopupCross();
 
         //asserts
-        assertTrue(indexPage.logOffCss.isEnabled());
+        assertTrue(new IndexPageNew(driver).logOffCss.isEnabled());
         assertTrue(adminPage.leftMenu.isDisplayed());
 
         //cookies asserts
@@ -60,8 +55,7 @@ public class Study_001_AuthTests extends DefaultTestCaseNew {
     @Test
     public void test_003_UserCreateNew() {
         IndexPageNew indexPage = new IndexPageNew(driver)
-                .openSite()
-                .clickOnLoginButton()
+                .get()
                 .clickOnCreateAccountLink()
                 .createAccount(newUser)
                 .waitForPageTitle()

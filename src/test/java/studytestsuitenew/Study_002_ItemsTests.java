@@ -7,7 +7,7 @@ import pageobjectsnew.IndexPageNew;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static studytestsuiteold.HelpMethods.studyTexts;
+import static studytestsuitenew.HelpMethodsNew.studyTexts;
 
 /**
  * Created by user on 06.06.17.

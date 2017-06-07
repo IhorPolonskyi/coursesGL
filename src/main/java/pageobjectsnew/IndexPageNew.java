@@ -9,13 +9,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import org.testng.Assert;
+import pageobjectsold.IndexPage;
 import pageobjectsold.ItemPage;
 import utility.Constants;
+import utility.Services.ManageUrlService;
 
 import java.util.List;
 import java.util.Random;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
+import static org.testng.Assert.assertTrue;
+import static utility.Services.ManageUrlService.getCurrentURL;
 import static utility.Services.ManageUrlService.getURL;
 import static utility.Services.WaiterService.waitForCookie;
 import static utility.Services.WaiterService.waitForElementVisible;
@@ -25,7 +31,7 @@ import static utility.Services.WebElementService.sendKeysClear;
 /**
  * Created by igorp on 11/05/17.
  */
-public class IndexPageNew {
+public class IndexPageNew extends LoadableComponent<IndexPageNew> {
 
     protected WebDriver driver;
 
@@ -170,7 +176,6 @@ public class IndexPageNew {
 
         ItemPage itemPage = initElements(driver, ItemPage.class);
 
-            //TODO fix add to cart
             for (int i = 0; i < item; i++) {
                 Random random = new Random();
                 int randomItem = random.nextInt(featuredItems.size());
@@ -195,7 +200,6 @@ public class IndexPageNew {
         ItemPage itemPage = initElements(driver, ItemPage.class);
         List<WebElement> list = ListUtils.union(bestsellersItems,featuredItems);
 
-        //TODO fix add to cart
         Random random = new Random();
         int randomItem = random.nextInt(list.size());
         clickOnElement(list.get(randomItem), "Item page", driver);
@@ -238,6 +242,33 @@ public class IndexPageNew {
         getURL(Constants.CART_PAGE, driver);
         return this;
     }
+
+
+    public IndexPageNew huckToCreateAccount(User user, String errorText, WebDriver driver){
+
+        IndexPage indexPage = initElements(driver, IndexPage.class);
+        if(!indexPage.loginErrorMessage.isEmpty( )&& indexPage.getErrorText().equals(errorText)){
+            //click on create account link
+            indexPage.clickOnCreateAccountLink();
+
+            //create new account with generating new email
+            waitForElementVisible(indexPage.createAccountButtonCss, driver);
+            indexPage.createAccount(user);
+
+        }
+        return this;
+    }
+
+    public void load() {
+        new IndexPageNew(driver)
+                .openSite()
+                .clickOnLoginButton();
+    }
+
+    public void isLoaded() throws Error {
+        assertTrue(getCurrentURL(driver).contains(Constants.URL));
+    }
+
 }
 
 

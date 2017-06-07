@@ -6,7 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import utility.Constants;
 
+import static org.testng.Assert.assertTrue;
+import static utility.Services.ManageUrlService.getCurrentURL;
 import static utility.Services.WaiterService.waitForElementVisible;
 import static utility.Services.WaiterService.waitPageLoader;
 import static utility.Services.WebElementService.clickOnElement;
@@ -15,7 +19,7 @@ import static utility.Services.WebElementService.sendKeysClear;
 /**
  * Created by user on 14.05.17.
  */
-public class AdminPageNew {
+public class AdminPageNew extends LoadableComponent<AdminPageNew> {
 
     protected WebDriver driver;
 
@@ -72,6 +76,16 @@ public class AdminPageNew {
     public AdminPageNew waitAdminPageLoad(String url) {
         waitPageLoader(url.replace("+","="), driver);
         return this;
+    }
+
+    public void load() {
+        new IndexPageNew(driver)
+                .openSite()
+                .clickOnGoToAdminPanelLink();
+    }
+
+    public void isLoaded() throws Error {
+        assertTrue(getCurrentURL(driver).contains(Constants.URL));
     }
 
 }

@@ -24,27 +24,4 @@ public interface HelpMethodsNew {
 
     Map<String, String> studyTexts = getMap("src/test/resources/properties/studysuite/texts.txt");
 
-    default void huckToCreateAccount(WebDriver driver){
-
-        IndexPage indexPage = initElements(driver, IndexPage.class);
-        if(!indexPage.loginErrorMessage.isEmpty( )&& indexPage.getErrorText().equals(studyTexts.get("errorMessage"))){
-            //click on create account link
-            indexPage.clickOnCreateAccountLink();
-
-            //create new account with generating new email
-            waitForElementVisible(indexPage.createAccountButtonCss, driver);
-            indexPage.createAccount(returningUser);
-            driver.manage().deleteAllCookies();
-            refreshPage(driver);
-            getURL(Constants.URL, driver);
-
-            waitForElementVisible(indexPage.loginButtonCss, driver);
-            indexPage.clickOnLoginButton();
-            waitForElementVisible(indexPage.signInButtonCss, driver);
-            indexPage.login(returningUser, "enter");
-
-        }
-    }
-
-
 }
