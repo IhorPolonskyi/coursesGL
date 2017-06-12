@@ -29,7 +29,7 @@ public class CartPageNew {
     @FindBy(css = ".item-title a")
     public List<WebElement> itemsNames;
 
-    @FindBy(xpath = "//*[@class='remove next-previous-assigned']")
+    @FindBy(css = "a[class*=remove]")
     public List<WebElement> removeFromCart;
 
     public String getHeaderTextInCart() {

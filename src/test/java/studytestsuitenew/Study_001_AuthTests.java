@@ -1,13 +1,17 @@
 package studytestsuitenew;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageobjectsnew.AdminPageNew;
 import pageobjectsnew.IndexPageNew;
 import studytestsuiteold.HelpMethods;
 import utility.DataProviders;
+import utility.Log;
+import utility.LogUtils;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 import static studytestsuitenew.HelpMethodsNew.*;
 import static utility.Services.AdditionalService.getCookieValue;
 import static utility.Services.AdditionalService.verifyCookieIsSet;
