@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static utility.Services.WaiterService.waitForTextVisible;
 import static utility.Services.WebElementService.clickOnElement;
@@ -29,7 +32,7 @@ public class CartPageNew {
     @FindBy(css = ".item-title a")
     public List<WebElement> itemsNames;
 
-    @FindBy(xpath = "//*[@class='remove next-previous-assigned']")
+    @FindBy(css = "a[class*=remove]")
     public List<WebElement> removeFromCart;
 
     public String getHeaderTextInCart() {
@@ -51,11 +54,9 @@ public class CartPageNew {
     }
 
     public List<String> getAllItemsNames() {
-        List<String> list = new LinkedList<>();
-        itemsNames.forEach(element ->{
-            list.add(element.getText());
-        });
-        return list;
+        return itemsNames.stream()
+                .map(element -> element.getText())
+                .collect(Collectors.toList());
     }
 
 

@@ -32,7 +32,7 @@ public class Study_002_ItemsTests extends DefaultTestCaseNew {
 
         new IndexPageNew(driver)
                 .openSite()
-                .addRandomItemFromIndexPageToCart(item)
+                .addOneRandomItemToCartAndAddItemNameToItemBusinessObject(item)
                 .getCartPage();
 
         assertEquals(new CartPageNew(driver).getFirstItemName(), item.getName());

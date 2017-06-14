@@ -10,11 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
-import org.testng.Assert;
 import pageobjectsold.IndexPage;
 import pageobjectsold.ItemPage;
 import utility.Constants;
-import utility.Services.ManageUrlService;
 
 import java.util.List;
 import java.util.Random;
@@ -196,7 +194,7 @@ public class IndexPageNew extends LoadableComponent<IndexPageNew> {
         return this;
         }
 
-    public IndexPageNew addRandomItemFromIndexPageToCart(Item item) {
+    public IndexPageNew addOneRandomItemToCartAndAddItemNameToItemBusinessObject(Item item) {
         ItemPage itemPage = initElements(driver, ItemPage.class);
         List<WebElement> list = ListUtils.union(bestsellersItems,featuredItems);
 
@@ -213,7 +211,7 @@ public class IndexPageNew extends LoadableComponent<IndexPageNew> {
         }
         catch (TimeoutException e) {
             getURL(Constants.URL, driver);
-            addRandomItemFromIndexPageToCart(item);
+            addOneRandomItemToCartAndAddItemNameToItemBusinessObject(item);
         }
         return this;
     }
@@ -246,14 +244,13 @@ public class IndexPageNew extends LoadableComponent<IndexPageNew> {
 
     public IndexPageNew huckToCreateAccount(User user, String errorText, WebDriver driver){
 
-        IndexPage indexPage = initElements(driver, IndexPage.class);
-        if(!indexPage.loginErrorMessage.isEmpty( )&& indexPage.getErrorText().equals(errorText)){
+        if(!loginErrorMessage.isEmpty( )&& getErrorText().equals(errorText)){
             //click on create account link
-            indexPage.clickOnCreateAccountLink();
+            clickOnCreateAccountLink();
 
             //create new account with generating new email
-            waitForElementVisible(indexPage.createAccountButtonCss, driver);
-            indexPage.createAccount(user);
+            waitForElementVisible(createAccountButtonCss, driver);
+            createAccount(user);
 
         }
         return this;
